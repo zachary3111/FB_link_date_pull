@@ -83,7 +83,11 @@ async function extractPostDetails(page, post_url) {
 
     // 4) Relative visible text (“2 h”, “Yesterday”, “August 18 at 4:43 AM”, etc.)
     if (!create_time_iso) {
-      const relTxt = (document.querySelector('a[href*="/story.php"] span, a[role="link"] span, abbr')?.textContent || '').trim();
+      const relTxt = Array
+        .from(document.querySelectorAll('a[href*="/story.php"] span, a[role="link"] span, abbr'))
+        .map((el) => el.textContent.trim())
+        .find((t) => t && /^(?:\d+\s*m(?:in)?|\d+\s*h(?:ours?)?|\d+\s*d(?:ays?)?|yesterday|just now|[A-Za-z]+\s+\d{1,2})/i.test(t))
+        || '';
       if (relTxt) {
         const now = Date.now();
         let ms = null, m;
