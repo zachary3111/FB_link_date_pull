@@ -1,0 +1,13 @@
+{
+  "name": "facebook-posts-comments-clone",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "apify": "^3.1.10",
+    "playwright": "^1.47.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "mode": "POST_URLS",
+  "post_urls": [
+    "https://www.facebook.com/permalink.php?story_fbid=pfbid02vPwUnk3oNcGURhSiwvRDuKwnoPWCALMaAAADdiutLgPweF7v4pJZyQ8iX77xVgQol&id=61573440983602",
+    "https://www.facebook.com/WillmottandLake/posts/pfbid02kfKjgx4yhk9bspx5v3sttPpkdPpWUQ5zjRhePFN74oRsTHjenxGHvfhXjzm9ZcNel"
+  ],
+  "include_comments": true,
+  "max_comments_per_post": 50,
+  "max_posts": 2,
+  "min_wait_ms": 1000,
+  "max_wait_ms": 3000,
+  "headless": true,
+  "cookies": "c_user=100002902466267; xs=21%3AvC0jwgvFP4Aw0Q%3A2%3A1754243649%3A-1%3A-1%3A%3AAcV22x86-e1taBxoyb6upH7yU4oMRyWMnGkQVfvq6Q; fr=1oyndW0bfZh4uedoy.AWcuzHlYGlkPsDKM10FqT_iE-1iRdSN0Iy_p73Vx0PCbm1L3G6A.Boqzvb..AAA.0.0.Boqzvb.AWf4lZChiN8kpmYBi78KK9a8E1o; datr=0D8raJdnSRKYMPRven2BZdR9; sb=0D8raNo3VWkMn1nhWAuOiC-X; dpr=0.75; wd=1277x1213; ps_l=1; ps_n=1"
+}

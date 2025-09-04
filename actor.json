@@ -1,0 +1,15 @@
+{
+  "actorSpecification": 1,
+  "name": "facebook-posts-comments-clone",
+  "title": "Facebook Posts/Comments Scraper (Clone)",
+  "version": "0.1",
+  "buildTag": "latest",
+  "defaultRunOptions": {
+    "build": "latest"
+  },
+  "env": {
+    "APIFY_DEFAULT_KEY_VALUE_STORE_ID": "default"
+  },
+  "dockerfile": "./Dockerfile",
+  "input": "./input_schema.json"
+}

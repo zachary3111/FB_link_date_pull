@@ -1,0 +1,71 @@
+{
+  "title": "Facebook Posts/Comments Scraper (Clone)",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "mode": {
+      "title": "Mode",
+      "type": "string",
+      "enum": ["POST_URLS"],
+      "default": "POST_URLS",
+      "description": "SEARCH = scrape results from Facebook search using search_queries. POST_URLS = visit specific post URLs in post_urls.",
+      "editor": "select"
+    },
+    "post_urls": {
+      "title": "Post URLs",
+      "type": "array",
+      "items": { "type": "string" },
+      "default": [],
+      "description": "Direct Facebook post links (permalink or /posts/pfbid...) to scrape (only used when mode=POST_URLS). One URL per line.",
+      "editor": "stringList"
+    },
+    "max_posts": {
+      "title": "Max posts to scrape",
+      "type": "integer",
+      "default": 30,
+      "minimum": 1,
+      "description": "Upper limit of posts to process in this run. In SEARCH mode, caps discovered post URLs; in POST_URLS mode, caps the list."
+    },
+    "include_comments": {
+      "title": "Include comments",
+      "type": "boolean",
+      "default": true,
+      "description": "If true, expand and extract comments for each post (slower). If false, only post details are saved."
+    },
+    "max_comments_per_post": {
+      "title": "Max comments per post",
+      "type": "integer",
+      "default": 50,
+      "minimum": 0,
+      "description": "Maximum number of comments to collect per post when include_comments=true."
+    },
+    "cookies": {
+      "title": "Cookie header",
+      "type": "string",
+      "default": "",
+      "description": "Paste the FULL value of the HTTP request header named 'cookie' from a logged-in facebook.com request. Required for consistent results.",
+      "editor": "textarea"
+    },
+    "min_wait_ms": {
+      "title": "Min wait (ms)",
+      "type": "integer",
+      "default": 1000,
+      "minimum": 0,
+      "description": "Minimum delay (in milliseconds) between actions (navigation, clicks, scrolls) to help avoid rate-limits."
+    },
+    "max_wait_ms": {
+      "title": "Max wait (ms)",
+      "type": "integer",
+      "default": 3000,
+      "minimum": 0,
+      "description": "Maximum delay (in milliseconds) between actions. Actual waits are randomized between min_wait_ms and max_wait_ms."
+    },
+    "headless": {
+      "title": "Headless",
+      "type": "boolean",
+      "default": true,
+      "description": "If true, Playwright runs without a visible browser window. Set false for debugging."
+    }
+  },
+  "required": ["cookies"]
+}
