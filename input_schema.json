@@ -1,71 +1,114 @@
 {
-  "title": "Facebook Posts/Comments Scraper (Clone)",
+  "title": "Input",
+  "description": "Configure what to extract from Facebook posts.",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
     "mode": {
       "title": "Mode",
       "type": "string",
-      "enum": ["POST_URLS"],
-      "default": "POST_URLS",
-      "description": "SEARCH = scrape results from Facebook search using search_queries. POST_URLS = visit specific post URLs in post_urls.",
-      "editor": "select"
+      "description": "What to extract: full post details or only the post's date/time.",
+      "editor": "select",
+      "default": "POST_DETAILS",
+      "enum": [
+        "POST_DETAILS",
+        "POST_DATES"
+      ],
+      "enumTitles": [
+        "Post details (author, text, counts, date)",
+        "Post dates only"
+      ]
     },
-    "post_urls": {
+    "urls": {
       "title": "Post URLs",
       "type": "array",
-      "items": { "type": "string" },
-      "default": [],
-      "description": "Direct Facebook post links (permalink or /posts/pfbid...) to scrape (only used when mode=POST_URLS). One URL per line.",
-      "editor": "stringList"
-    },
-    "max_posts": {
-      "title": "Max posts to scrape",
-      "type": "integer",
-      "default": 30,
-      "minimum": 1,
-      "description": "Upper limit of posts to process in this run. In SEARCH mode, caps discovered post URLs; in POST_URLS mode, caps the list."
-    },
-    "include_comments": {
-      "title": "Include comments",
-      "type": "boolean",
-      "default": true,
-      "description": "If true, expand and extract comments for each post (slower). If false, only post details are saved."
-    },
-    "max_comments_per_post": {
-      "title": "Max comments per post",
-      "type": "integer",
-      "default": 50,
-      "minimum": 0,
-      "description": "Maximum number of comments to collect per post when include_comments=true."
+      "description": "Array of Facebook post URLs to open (one per line).",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": [
+          "https://www.facebook.com/zuck/posts/10102577175875681",
+          "https://www.facebook.com/somepage/posts/1234567890",
+          "https://m.facebook.com/story.php?story_fbid=123&id=456"
+        ],
+        "enumTitles": [
+          "Sample: Zuck post (example)",
+          "Sample: Page post (example)",
+          "Sample: m.facebook.com story (example)"
+        ]
+      },
+      "default": []
     },
     "cookies": {
-      "title": "Cookie header",
+      "title": "Cookies",
       "type": "string",
-      "default": "",
-      "description": "Paste the FULL value of the HTTP request header named 'cookie' from a logged-in facebook.com request. Required for consistent results.",
-      "editor": "textarea"
+      "description": "Either JSON array of cookies, JSON with {cookies:[...]}, or a raw Cookie header string.",
+      "editor": "select",
+      "enum": [
+        "",
+        "{\"cookies\":[{\"name\":\"c_user\",\"value\":\"123\"},{\"name\":\"xs\",\"value\":\"...\"}]}",
+        "c_user=123; xs=...; datr=..."
+      ],
+      "enumTitles": [
+        "Empty (no cookies)",
+        "JSON object with cookies[]",
+        "Raw Cookie header string"
+      ]
     },
     "min_wait_ms": {
       "title": "Min wait (ms)",
       "type": "integer",
-      "default": 1000,
+      "description": "Lower bound of randomized inter-action delay.",
+      "default": 1200,
       "minimum": 0,
-      "description": "Minimum delay (in milliseconds) between actions (navigation, clicks, scrolls) to help avoid rate-limits."
+      "unit": "ms"
     },
     "max_wait_ms": {
       "title": "Max wait (ms)",
       "type": "integer",
-      "default": 3000,
+      "description": "Upper bound of randomized inter-action delay.",
+      "default": 2500,
       "minimum": 0,
-      "description": "Maximum delay (in milliseconds) between actions. Actual waits are randomized between min_wait_ms and max_wait_ms."
+      "unit": "ms"
     },
     "headless": {
       "title": "Headless",
       "type": "boolean",
-      "default": true,
-      "description": "If true, Playwright runs without a visible browser window. Set false for debugging."
+      "description": "Run browser in headless mode (no visible window).",
+      "default": true
+    },
+    "viewport": {
+      "title": "Viewport",
+      "type": "object",
+      "description": "Browser viewport size.",
+      "properties": {
+        "width": {
+          "title": "Width",
+          "type": "integer",
+          "description": "Viewport width in pixels.",
+          "default": 1280,
+          "minimum": 320
+        },
+        "height": {
+          "title": "Height",
+          "type": "integer",
+          "description": "Viewport height in pixels.",
+          "default": 900,
+          "minimum": 320
+        }
+      },
+      "default": {
+        "width": 1280,
+        "height": 900
+      }
+    },
+    "userAgent": {
+      "title": "User-Agent override",
+      "type": "string",
+      "description": "Optional User-Agent string to spoof."
     }
   },
-  "required": ["cookies"]
+  "required": [
+    "urls"
+  ]
 }
